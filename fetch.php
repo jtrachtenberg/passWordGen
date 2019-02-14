@@ -1,4 +1,5 @@
 <?php
+/* This should be placed in root of php server */
 header('Content-Type: application/json');
 /* 
 FETCH data from the Oxford API for front end REACT app
