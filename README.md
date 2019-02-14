@@ -1,3 +1,11 @@
+passWordGen :  Generate and store passwords based on english words in a lexical pattern.
+
+Beginning with this article: https://www.baekdal.com/thoughts/password-security-usability/, which heavily influenced the XKCD comic here: https://xkcd.com/936/ - it is posited that a password of mulitple english words in a row of a sufficent number of characters, generally 3 or more words, is sufficently safe as to be practical for average security, as well as far easier to remember than a random flux of characters.
+
+This program utilizes the Oxford Dictionary API to greate passwords for a given lexical pattern, using adjective, noun, verb, adverb by default.  The pattern will be customizable.  Optional additions of numbers and symbols, as requried for passwords in some systems, will be available.
+
+Generated README follows:
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
