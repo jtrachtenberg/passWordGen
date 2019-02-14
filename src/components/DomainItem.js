@@ -1,3 +1,5 @@
+/* Depracated - replaced with React-Select in PasswordForm */
+
 import React, { Component } from 'react';
 
 class DomainItem extends Component {
