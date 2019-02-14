@@ -1,4 +1,4 @@
-/* Depracated - replaced with React-Select in PasswordForm */
+/* Deprecated - replaced with React-Select in PasswordForm */
 
 import React, { Component } from 'react';
 
