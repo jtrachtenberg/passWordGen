@@ -5,6 +5,7 @@ import ls from 'local-storage';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Passwords from './components/Passwords';
 import PasswordForm from './components/PasswordForm';
+import InitLoader from './components/InitLoader';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 
@@ -12,20 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    Passwords: [
-        {
-          id: 1,
-          password: 'alateairbladderbreedplump',
-          url: 'google.com',
-          createDate: 1518239331000
-        }, 
-        {
-           id: 2,
-          password: '3alateairbladderbreedplump!',
-          url: 'ebay.com',
-          createDate: 1549746468327
-        }
-      ],
+      Passwords: [],
       showForm: false,
       maxID: 0,
       password: {},
@@ -40,6 +28,7 @@ class App extends Component {
   
   //Load previous state from local storage
   componentDidMount() {
+    if (this.state.Passwords.length === 0) this.toggleModal();
     let inState = ls.get('Passwords');
     if (inState != null && inState.length > 0) {
       this.setState({
@@ -94,8 +83,9 @@ class App extends Component {
       <React.Fragment>
       <CssBaseline />
       <div className="App">
-
-      <Passwords passwords={this.state.Passwords} handleDeletePassword={this.handleDeletePassword}/>
+      {this.state.Passwords.length > 0 ? 
+        <Passwords passwords={this.state.Passwords} handleDeletePassword={this.handleDeletePassword}/> : <InitLoader />
+      }
       <Button variant="contained" color="primary" onClick={this.toggleModal}><AddIcon style = {{fontSize:32}}/></Button>
       </div>
       {
