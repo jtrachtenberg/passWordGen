@@ -57,15 +57,19 @@ class PasswordForm extends Component {
         var inWords = [];
         inData.forEach(result => {
         //console.log(JSON.parse(result));
+        try {
         var json = JSON.parse(result).results; //skip the metadata included in the API
-        console.log(json);
+        //console.log(json);
         Object.keys(json).forEach(function(key) {
            var newObject = {
                 key: json[key]['id'],
                 value: json[key]['word'],
             }
             inWords.push(newObject);
-        }); 
+        }) 
+        } catch(error) {
+          console.log(error);
+        }
         });
          
     return inWords;
@@ -79,7 +83,7 @@ class PasswordForm extends Component {
         newPassword += result.value;  
       })
 
-      this.setState({fetchStart: false,fetchComplete: 0, password: newPassword});
+      this.setState({fetchStart: false,fetchComplete: 0, password: newPassword.replace(/\s/g,'')});
   }
   
   runAllFetch = (inQueries) => {

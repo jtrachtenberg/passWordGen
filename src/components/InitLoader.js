@@ -9,13 +9,27 @@ class InitLoader extends Component {
       }
     }
     
+    toggleLoadComplete = () => {
+        this.setState({
+            loadComplete: !this.state.loadComplete,
+        });
+    }
+    
+    componentDidMount() {
+        setTimeout(this.toggleLoadComplete, 2000);
+    }
+    
     render() {
         return (
+            <React.Fragment>
+            {this.state.loadComplete ? <span></span> :
             <div className="loader-container">
                 <div className="loader">
-                 <div className="loader-title"></div>
+                 <div className="loader-title">Loading</div>
                 </div>
             </div>
+            }
+            </React.Fragment>
         )
     }
 }
