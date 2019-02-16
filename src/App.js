@@ -14,6 +14,7 @@ class App extends Component {
     super(props);
     this.state = {
       Passwords: [],
+      domains: [],
       showForm: false,
       maxID: 0,
       password: {},
@@ -24,6 +25,10 @@ class App extends Component {
     this.setState({
       showForm: !this.state.showForm
     });
+  }
+  
+  setDomains = (domains) => {
+    this.setState ({domains: domains});
   }
   
   //Load previous state from local storage
@@ -41,20 +46,13 @@ class App extends Component {
         maxID: inState,
       })
     }
+    inState = ls.get('domains');
+    if (inState) {
+      this.setState({
+        domains: inState,
+      });
+    }
   }  
-    /*componentDidMount() {
-    fetch(LATEST_URL)
-    .then(response => response.json())
-    .then(json => this.setState({
-      latestArticles: json.results,
-      readNow: ls.get('readNow') || [],
-      readLater: ls.get('readLater') || [],
-      likedSections: ls.get('likedSections') || [],
-      articleWireType: "latest",
-    }));
-  
-
-    }*/
   
   handleDeletePassword = (password) => {
     const truncatedList = this.state.Passwords.slice(0);
@@ -84,13 +82,13 @@ class App extends Component {
       <CssBaseline />
       <div className="App">
       {this.state.Passwords.length > 0 ? 
-        <Passwords passwords={this.state.Passwords} handleDeletePassword={this.handleDeletePassword}/> : <InitLoader />
+        <Passwords passwords={this.state.Passwords} handleDeletePassword={this.handleDeletePassword}/> : <InitLoader loader={this.setDomains} />
       }
       <Button variant="contained" color="primary" onClick={this.toggleModal}><AddIcon style = {{fontSize:32}}/></Button>
       </div>
       {
-        this.state.showForm ?
-         <PasswordForm closePopup={this.toggleModal} savePassword={this.handleSavePassword} maxID={this.state.maxID} />
+        this.state.showForm && this.state.domains.length > 0 ?
+         <PasswordForm domains={this.state.domains} closePopup={this.toggleModal} savePassword={this.handleSavePassword} maxID={this.state.maxID} />
          : null
       }
       </React.Fragment>

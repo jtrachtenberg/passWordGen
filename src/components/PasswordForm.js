@@ -136,14 +136,15 @@ class PasswordForm extends Component {
   }
   componentDidMount() {
     if (this.state.domains.length < 1) {
-        let inDomains = ls.get('domains');
+      //console.log(this.props)
+        let inDomains = this.props.domains;//ls.get('domains');
         if (inDomains != null && inDomains.length > 0) {
           this.setState({
           domains: inDomains,
           });
         } else {
             //Fetch valid domains
-            fetch('https://react-test-jtrachtenberg.c9users.io:8081/fetch.php').then(response => response.json()).then(data => this.processDomains(JSON.parse(data)));
+            //fetch('https://react-test-jtrachtenberg.c9users.io:8081/fetch.php').then(response => response.json()).then(data => this.processDomains(JSON.parse(data)));
 
         }
     }
